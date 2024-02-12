@@ -12,17 +12,17 @@ public class NiveauGraphique extends JComponent {
     Image But,Caisse,Caisse_sur_but,Mur,Sol;
     Jeu j;
 
-    public NiveauGraphique(Jeu jeu) {
-
+    public NiveauGraphique(Jeu jeu)  {
         this.j=jeu;
+
         try {
             // Chargement de l'image de la même manière que le fichier de niveaux
-            InputStream pousseur = new FileInputStream("/home/amine/IdeaProjects/SokobanPousseur.png");
-            InputStream but = new FileInputStream("/home/amine/IdeaProjects/SokobanBut.png");
-            InputStream caisse = new FileInputStream("/home/amine/IdeaProjects/Sokoban/Caisse.png");
-            InputStream caisse_sur_but = new FileInputStream("/home/amine/IdeaProjects/Sokoban/Caisse_sur_but.png");
-            InputStream mur = new FileInputStream("/home/amine/IdeaProjects/Sokoban/mur.png");
-            InputStream sol = new FileInputStream("/home/amine/IdeaProjects/Sokoban/sol.png");
+            InputStream pousseur = new FileInputStream("/home/e/elouechm/IdeaProjects/Sokoban/Images/Pousseur.png");
+            InputStream but = new FileInputStream("/home/e/elouechm/IdeaProjects/Sokoban/Images/But.png");
+            InputStream caisse = new FileInputStream("/home/e/elouechm/IdeaProjects/Sokoban/Images/Caisse.png");
+            InputStream caisse_sur_but = new FileInputStream("/home/e/elouechm/IdeaProjects/Sokoban/Images/Caisse_sur_but.png");
+            InputStream mur = new FileInputStream("/home/e/elouechm/IdeaProjects/Sokoban/Images/Mur.png");
+            InputStream sol = new FileInputStream("/home/e/elouechm/IdeaProjects/Sokoban/Images/Sol.png");
 
 
             // Chargement d'une image utilisable dans Swing
@@ -42,8 +42,8 @@ public class NiveauGraphique extends JComponent {
         }
         counter = 1;
     }
-    public void tracer(Graphics2D g,int ligne,int colonne,int longeur_case,int hauteur,Image i){
-
+    public void tracer(Graphics2D g,int ligne,int colonne,int longeur_case,int hauteur_case,Image i){
+        g.drawImage(i,ligne,colonne,longeur_case,hauteur_case,null);
     }
 
     @Override
@@ -56,28 +56,32 @@ public class NiveauGraphique extends JComponent {
         Graphics2D dessin=(Graphics2D) g;
         int largeur = getSize().width;
         int hauteur =getSize().height;
+
         int larageur_case=largeur/n.colonnes();
         int hauteur_case=hauteur/n.lignes();
 
 
         for (int i=0;i<n.lignes();i++){
-            for(int j=0;i<n.colonnes();j++){
+            for(int j=0;j<n.colonnes();j++){
+                int x = j * larageur_case;
+                int y = i * hauteur_case;
+
                 if(n.aBut(i,j)){
-                    tracer(dessin,i,j,hauteur_case,larageur_case,But);
+                    tracer(dessin,x,y,hauteur_case,larageur_case,But);
                 }else{
-                    tracer(dessin,i,j,hauteur_case,larageur_case,Sol);
+                    tracer(dessin,x,y,hauteur_case,larageur_case,Sol);
                 }
                  if(n.aPousseur(i,j)){
-                     tracer(dessin,i,j,hauteur_case,larageur_case,Pousseur);
+                     tracer(dessin,x,y,hauteur_case,larageur_case,Pousseur);
                 }else if(n.aMur(i,j)){
-                     tracer(dessin,i,j,hauteur_case,larageur_case,Mur);
+                     tracer(dessin,x,y,hauteur_case,larageur_case,Mur);
                 }else if(n.aCaisse(i,j)){
 
                     if(n.aBut(i,j)){
-                        tracer(dessin,i,j,hauteur_case,larageur_case,Caisse_sur_but);
+                        tracer(dessin,x,y,hauteur_case,larageur_case,Caisse_sur_but);
                     }else{
                             //caisse
-                        tracer(dessin,i,j,hauteur_case,larageur_case,Caisse);
+                        tracer(dessin,x,y,hauteur_case,larageur_case,Caisse);
                     }
                 }
 
