@@ -25,40 +25,39 @@
  *          38401 Saint Martin d'Hères
  */
 
+import Global.Configuration;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import static Global.Configuration.ouvre;
+
 public class Sokoban {
 	public static void main(String[] args) {
 		InputStream in;
-		try {
-			if (args.length > 0)
-				in = new FileInputStream("res/Niveaux/" + args[0] + ".txt");
-			else
-				in = new FileInputStream("res/Niveaux/Original.txt");
-			Configuration.info("Niveaux trouvés");
-			LecteurNiveaux l = new LecteurNiveaux(in);
+        if (args.length > 0)
+            in=ouvre("res/Niveaux/" + args[0] + ".txt");
+        else
+            in = ouvre("res/Niveaux/Original.txt");
+        Configuration.info("Niveaux trouvés");
+        LecteurNiveaux l = new LecteurNiveaux(in);
 
-			Jeu jeu=new Jeu(l);
-			int num=1;
-			if (args.length > 1)
-				num = Integer.parseInt(args[1]);
-			Configuration.info("Affichage du Niveau " + num);
-			while (num != 0) {
-				if (!jeu.prochainNiveau()) {
-					Configuration.info("Pas assez de niveaux dans le fichier de niveaux");
-					System.exit(2);
-				}
-				num--;
-			}
-				InterfaceGraphique.launcher(jeu);
+        Jeu jeu=new Jeu(l);
+        int num=3;
+        if (args.length > 1)
+            num = Integer.parseInt(args[1]);
+        Configuration.info("Affichage du Niveau " + num);
+        while (num != 0) {
+            if (!jeu.prochainNiveau()) {
+                Configuration.info("Pas assez de niveaux dans le fichier de niveaux");
+                System.exit(2);
+            }
+            num--;
+        }
+        InterfaceGraphique.launcher(jeu);
 
-		} catch (FileNotFoundException e) {
-			System.err.println("ERREUR : impossible de trouver le fichier de niveaux");
-			System.exit(1);
-		}
-	}
+    }
 
 
 }
