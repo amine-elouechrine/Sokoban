@@ -13,5 +13,13 @@ public class Jeu {
         return niveau!=null;
     }
 
+    public int ligneP(){
+        return niveau.getPL();
+    }
+
+    public int ColonneP(){
+        return niveau.getPC();
+    }
+
 
 }

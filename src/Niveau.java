@@ -34,10 +34,12 @@ class Niveau {
 	int l, c;
 	int[][] cases;
 	String nom;
+	int PousseurL,PousseurC;
 
 	Niveau() {
 		cases = new int[1][1];
 		l = c = 1;
+		PousseurC=PousseurL=-1;
 	}
 
 	int ajuste(int cap, int objectif) {
@@ -45,6 +47,12 @@ class Niveau {
 			cap = cap * 2;
 		}
 		return cap;
+	}
+	public int getPL(){
+		return PousseurL;
+	}
+	public int getPC(){
+		return PousseurC;
 	}
 
 	void redimensionne(int nouvL, int nouvC) {
@@ -83,6 +91,8 @@ class Niveau {
 
 	void ajoutePousseur(int i, int j) {
 		ajoute(POUSSEUR, i, j);
+		PousseurL=i;
+		PousseurC=j;
 	}
 
 	void ajouteCaisse(int i, int j) {

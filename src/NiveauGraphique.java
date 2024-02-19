@@ -11,6 +11,8 @@ public class NiveauGraphique extends JComponent {
     Image Pousseur;
     Image But,Caisse,Caisse_sur_but,Mur,Sol;
     Jeu j;
+    int larageur_case;
+    int hauteur_case;
 
     public NiveauGraphique(Jeu jeu)  {
         this.j=jeu;
@@ -57,8 +59,8 @@ public class NiveauGraphique extends JComponent {
         int largeur = getSize().width;
         int hauteur =getSize().height;
 
-        int larageur_case=largeur/n.colonnes();
-        int hauteur_case=hauteur/n.lignes();
+         larageur_case=largeur/n.colonnes();
+         hauteur_case=hauteur/n.lignes();
 
 
         for (int i=0;i<n.lignes();i++){
@@ -87,5 +89,12 @@ public class NiveauGraphique extends JComponent {
 
             }
         }
+    }
+
+    public int hauteur_case(){
+        return hauteur_case;
+    }
+    public int largeur_case(){
+        return larageur_case;
     }
 }
