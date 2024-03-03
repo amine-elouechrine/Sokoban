@@ -11,18 +11,25 @@ public class AdaptateurS extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
+
         int l=e.getX()/niveauGraphique.hauteur_case();
         int h=e.getY()/niveauGraphique.largeur_case();
 
-
         //calculer la difference entre le Pousseur et le l'edroit clique
-        int diffligne=l-j.ligneP();
-        int diffcolonne=h-j.ColonneP();
 
-        if(j.niveau.estVide(l,h)){
+        int diffligne=l-j.ColonneP();
+        int diffcolonne=h-j.ligneP();
+        System.out.println(diffligne+"-------"+diffcolonne);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-        }else if(j.niveau.aCaisse(l,h)){
 
+
+        int somme=diffcolonne+diffligne;
+
+        if((diffligne*diffcolonne==0) && (somme*somme==1)){
+            j.deplace(diffligne,diffcolonne);
+            niveauGraphique.repaint();
         }
+
     }
 }

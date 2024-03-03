@@ -35,6 +35,8 @@ class Niveau {
 	int[][] cases;
 	String nom;
 	int PousseurL,PousseurC;
+	int nbButs=0;
+	int nbCaissesSurBut=0;
 
 	Niveau() {
 		cases = new int[1][1];
@@ -82,8 +84,22 @@ class Niveau {
 
 	void ajoute(int contenu, int i, int j) {
 		redimensionne(i, j);
-		cases[i][j] |= contenu;
+		int resultat = cases[i][j] | contenu;
+		if ((resultat & BUT) != 0) {
+			if (((resultat & CAISSE) != 0) && (!aCaisse(i, j) || !aBut(i, j)))
+				nbCaissesSurBut++;
+			if (!aBut(i, j))
+				nbButs++;
+		}
+		if (((resultat & POUSSEUR) != 0) && !aPousseur(i, j)) {
+			if (PousseurL != -1)
+				throw new IllegalStateException("Plusieurs pousseurs sur le terrain !");
+			PousseurL = i;
+			PousseurC = j;
+		}
+		cases[i][j] = resultat;
 	}
+
 
 	void ajouteMur(int i, int j) {
 		ajoute(MUR, i, j);
@@ -134,4 +150,44 @@ class Niveau {
 	boolean aCaisse(int l, int c) {
 		return (cases[l][c] & CAISSE) != 0;
 	}
+	public boolean estTermine() {
+		return nbCaissesSurBut == nbButs;
+	}
+
+
+	void supprime(int contenu,int i,int j){
+		if (aBut(i, j)) {
+			if (aCaisse(i, j) && ((contenu & CAISSE | contenu & BUT) != 0))
+				nbCaissesSurBut--;
+			if ((contenu & BUT) != 0)
+				nbButs--;
+		}
+		if (aPousseur(i, j) && ((contenu & POUSSEUR) != 0))
+			PousseurL = PousseurC = -1;
+		cases[i][j] &= ~contenu;
+
+	}
+	boolean deplace(int dLig, int dCol) {
+		int destL = PousseurL + dLig;
+		int destC = PousseurC + dCol;
+
+		if (aCaisse(destL, destC)) {
+			int dCaisL = destL + dLig;
+			int dCaisC = destC + dCol;
+
+			if (!aMur(dCaisL, dCaisC) && !aCaisse(dCaisL, dCaisC)) {
+				supprime(CAISSE, destL, destC);
+				ajoute(CAISSE, dCaisL, dCaisC);
+			} else {
+				return false;
+			}
+		}
+		if (!aMur(destL, destC)) {
+			supprime(POUSSEUR, PousseurL, PousseurC);
+			ajoute(POUSSEUR, destL, destC);
+			return true;
+		}
+		return false;
+	}
+
 }

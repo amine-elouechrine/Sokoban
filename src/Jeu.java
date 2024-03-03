@@ -13,6 +13,14 @@ public class Jeu {
         return niveau!=null;
     }
 
+    public boolean deplace(int x,int y){
+         boolean a=niveau.deplace(x,y);
+         if(niveau.estTermine()){
+             prochainNiveau();
+         }
+         return a;
+    }
+
     public int ligneP(){
         return niveau.getPL();
     }
