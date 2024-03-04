@@ -1,5 +1,8 @@
+package Vue;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import Modele.Jeu;
 
 public class AdaptateurC extends KeyAdapter {
     Jeu j;

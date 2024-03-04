@@ -26,6 +26,9 @@
  */
 
 import Global.Configuration;
+import Modele.Jeu;
+import Modele.LecteurNiveaux;
+import Vue.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,7 +47,8 @@ public class Sokoban {
         LecteurNiveaux l = new LecteurNiveaux(in);
 
         Jeu jeu=new Jeu(l);
-        int num=3;
+        int num=2;
+
         if (args.length > 1)
             num = Integer.parseInt(args[1]);
         Configuration.info("Affichage du Niveau " + num);

@@ -24,8 +24,8 @@
  *          Domaine universitaire
  *          38401 Saint Martin d'Hères
  */
-
-class Niveau {
+package Modele;
+public class Niveau {
 	static final int VIDE = 0;
 	static final int MUR = 1;
 	static final int POUSSEUR = 2;
@@ -119,35 +119,35 @@ class Niveau {
 		ajoute(BUT, i, j);
 	}
 
-	int lignes() {
+	public int lignes() {
 		return l;
 	}
 
-	int colonnes() {
+	public int colonnes() {
 		return c;
 	}
 
-	String nom() {
+	public String nom() {
 		return nom;
 	}
 
-	boolean estVide(int l, int c) {
+	public boolean estVide(int l, int c) {
 		return cases[l][c] == VIDE;
 	}
 
-	boolean aMur(int l, int c) {
+	public boolean aMur(int l, int c) {
 		return (cases[l][c] & MUR) != 0;
 	}
 
-	boolean aBut(int l, int c) {
+	public boolean aBut(int l, int c) {
 		return (cases[l][c] & BUT) != 0;
 	}
 
-	boolean aPousseur(int l, int c) {
+	public boolean aPousseur(int l, int c) {
 		return (cases[l][c] & POUSSEUR) != 0;
 	}
 
-	boolean aCaisse(int l, int c) {
+	public boolean aCaisse(int l, int c) {
 		return (cases[l][c] & CAISSE) != 0;
 	}
 	public boolean estTermine() {
@@ -155,7 +155,7 @@ class Niveau {
 	}
 
 
-	void supprime(int contenu,int i,int j){
+	public void supprime(int contenu,int i,int j){
 		if (aBut(i, j)) {
 			if (aCaisse(i, j) && ((contenu & CAISSE | contenu & BUT) != 0))
 				nbCaissesSurBut--;
@@ -167,7 +167,7 @@ class Niveau {
 		cases[i][j] &= ~contenu;
 
 	}
-	boolean deplace(int dLig, int dCol) {
+	public boolean deplace(int dLig, int dCol) {
 		int destL = PousseurL + dLig;
 		int destC = PousseurC + dCol;
 

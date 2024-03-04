@@ -1,5 +1,8 @@
+package Vue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import Modele.*;
+
 public class AdaptateurS extends MouseAdapter {
     Jeu j;
     NiveauGraphique niveauGraphique;
@@ -19,8 +22,6 @@ public class AdaptateurS extends MouseAdapter {
 
         int diffligne=l-j.ColonneP();
         int diffcolonne=h-j.ligneP();
-        System.out.println(diffligne+"-------"+diffcolonne);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
 
 

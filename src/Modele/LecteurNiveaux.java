@@ -24,7 +24,7 @@
  *          Domaine universitaire
  *          38401 Saint Martin d'Hères
  */
-
+package Modele;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -32,7 +32,7 @@ public class LecteurNiveaux {
 	Scanner s;
 	Niveau n;
 
-	LecteurNiveaux(InputStream in) {
+	public LecteurNiveaux(InputStream in) {
 		s = new Scanner(in);
 	}
 

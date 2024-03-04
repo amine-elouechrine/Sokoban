@@ -1,6 +1,7 @@
+package Modele;
 public class Jeu {
     int num_niveau;
-    Niveau niveau;
+    public Niveau niveau;
     LecteurNiveaux lecteurNiveaux;
     public Jeu(LecteurNiveaux lect){
         lecteurNiveaux=lect;

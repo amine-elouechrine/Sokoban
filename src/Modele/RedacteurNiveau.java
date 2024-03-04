@@ -24,7 +24,8 @@
  *          Domaine universitaire
  *          38401 Saint Martin d'Hères
  */
-
+package Vue;
+import Modele.*;
 import java.io.OutputStream;
 import java.io.PrintStream;
 

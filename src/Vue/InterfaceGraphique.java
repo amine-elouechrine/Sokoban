@@ -1,9 +1,10 @@
+package Vue;
+import Modele.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
 
 public class    InterfaceGraphique implements Runnable {
     Jeu j;
@@ -24,7 +25,7 @@ public class    InterfaceGraphique implements Runnable {
             maximized = true;
         }
     }
-    static void launcher(Jeu j){
+    public static void launcher(Jeu j){
 
         SwingUtilities.invokeLater(new InterfaceGraphique(j));
     }
